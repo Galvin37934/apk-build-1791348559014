@@ -1,0 +1,23 @@
+name: Build APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { java-version: '17', distribution: 'temurin' }
+      - uses: android-actions/setup-android@v3
+      - name: Build
+        run: |
+          npm install -g cordova
+          cordova create myapp com.rez.app "BelajarYuk! "
+          cd myapp
+          cordova platform add android
+          rm -rf www/*
+          cp ../index.html www/
+          cp ../config.xml .
+          
+          cordova build android --debug --device
+      - uses: actions/upload-artifact@v4
+        with: { name: APK, path: myapp/platforms/android/app/build/outputs/apk/debug/app-debug.apk }
