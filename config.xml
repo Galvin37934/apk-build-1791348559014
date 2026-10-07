@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.rez.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets">
+    <name>BelajarYuk! </name>
+    <content src="index.html" />
+    
+</widget>
